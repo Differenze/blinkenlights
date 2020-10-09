@@ -1,8 +1,8 @@
+from .program import Program
+from src.util.model_time import Time
 
-def init(x):
-    print("example initialized", x)
 
-
-def tick(timestamp: int):
-    if timestamp % 1000 == 0:
-        print("One second!")
+class Example(Program):
+    def run(self, tick: int, time: Time):
+        if time.second > 30:
+            self.driver

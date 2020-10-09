@@ -1,38 +1,24 @@
 import time
-MODEL_SECONDS_PER_REAL_SECOND = 2 / 60
-MODEL_SECONDS_PER_TICK = 3
-TICK_TIME = MODEL_SECONDS_PER_REAL_SECOND * MODEL_SECONDS_PER_TICK
-print(TICK_TIME)
+from src.programs.example_program import Example
+from src.util import model_time
 
-
-# 24hours = 86400 model seconds = 2880 seconds
-
-# model seconds per tick = 5
-# = 2/60*5 real seconds =
-
-# 24 model hours -> 48 real minutes
-# 1 model hour -> 2 real minutes
-# 60 model minutes -> 120 real world seconds
-# 1 model minute -> 2 real world seconds
-# 1 model second -> 2 seconds / 60
+programs = [Example()]
 
 
 def main_loop(tick):
-    model_second = tick*MODEL_SECONDS_PER_TICK
-    model_minute = model_second // 60
-    model_hour = model_minute // 60
-    print(time.time())
-    print("{}:{}:{}".format(model_hour, model_minute, model_second))
+    m_time.set_tick(tick)
+    for program in programs:
+        program.run(tick, m_time)
+    print(m_time)
     pass
 
 
-tick = 0
+# Timing Loop
+m_time = model_time.Time(0, 0, 0)
+tick = m_time.get_tick()
 start_time = time.time()
 while True:
     tick += 1
-    tick = (time.time()-start_time) // TICK_TIME
+    tick = (time.time()-start_time) // model_time.TICK_TIME
     main_loop(tick)
-    # this_loop = time.time()
-    # time.sleep(real_seconds_per_tick-(last_loop-this_loop))
-    # last_loop = this_loop
-    time.sleep(TICK_TIME - ((time.time() - start_time) % TICK_TIME))
+    time.sleep(model_time.TICK_TIME - ((time.time() - start_time) % model_time.TICK_TIME))
