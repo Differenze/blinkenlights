@@ -1,0 +1,41 @@
+{
+  "name": "Standard Config",
+  "registers": [
+    {
+      "leds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h"
+      ]
+    },
+    {
+      "leds": [
+        "bar_light",
+        "outside_left",
+        "outside_middle",
+        "cafe_entry",
+        "outside_right",
+        "street_light",
+        "inside_right",
+        "inside_left"
+      ]
+    },
+    {
+      "leds": [
+        "f1ya",
+        "f1yb",
+        "f1ra",
+        "f1rb",
+        "f2ya",
+        "f2yb",
+        "f2ra",
+        "f2rb"
+      ]
+    }
+  ]
+}
