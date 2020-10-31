@@ -11,3 +11,4 @@ class AlwaysOn(Program):
 
     def run(self, time: Time):
         self.driver.set_light(self.led_name, self.brightness)
+        # self.driver.set_light_by_index(time.second, 1)

@@ -2,6 +2,7 @@ import random
 import time
 import RPi.GPIO as GPIO
 import src.util.config as config_loader
+import threading
 
 # TODO read pins from config file
 
@@ -113,6 +114,7 @@ def to_binary(number, size=8):
 class Driver:
     data = []
     brightness = []
+    size = 0
 
     def get_bits_from_char(self, char):
         return get_bits_from_char(char)
@@ -129,13 +131,15 @@ class Driver:
         # print(self.address_dictionary)
         # self.data = [False for item in self.address_dictionary]
         # self.brightness = [0 for item in self.address_dictionary]
-        self.data = [False for item in range(0, 100)]
-        self.brightness = [0 for item in range(0, 100)]
+        self.size = 50
+        self.data = [False for item in range(0, self.size)]
+        self.brightness = [0 for item in range(0, self.size)]
+        # self.brightness = Array('d', range(self.size))
         print("ready")
 
     def update_lights(self, tick):
         threshhold = (tick % 5) / 5
-        for i in range(len(self.brightness)):
+        for i in range(self.size):
             self.data[i] = self.brightness[i] > threshhold
         set_lights(self.data)
 
@@ -147,7 +151,26 @@ class Driver:
             self.brightness[led_id] = brightness
 
     def set_light_by_index(self, index, brightness):
-        if index < 0 or index >= len(self.brightness):
+        if index < 0 or index >= self.size:
             print("index out of range ", index)
         else:
             self.brightness[index] = brightness
+
+    def driver_thread(self):
+        TICK_TIME = 0.004
+        print("driver thread started")
+        tick = 0
+        start_time = time.time()
+        missed_ticks = 0
+        while True:
+            last_tick = tick
+            tick = (time.time() - start_time) // TICK_TIME
+            if tick > last_tick + 1:
+                missed_ticks += tick - (last_tick + 1)
+                print("missed ticks ", missed_ticks)
+            self.update_lights(tick)
+            time.sleep(TICK_TIME - ((time.time() - start_time) % TICK_TIME))
+
+    def start(self):
+        dt = threading.Thread(target=self.driver_thread, daemon=True)
+        dt.start()

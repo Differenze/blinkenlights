@@ -3,11 +3,11 @@
   "registers": [
     {
       "leds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
+        "outside floor 3",
+        "inside floor 3 - 1",
+        "inside floor 3 - 2",
+        "floor 3 fireplace red",
+        "floor 3 fireplace yellow",
         "f",
         "g",
         "h"
@@ -15,21 +15,21 @@
     },
     {
       "leds": [
-        "bar_light",
-        "outside_left",
-        "outside_middle",
-        "cafe_entry",
-        "outside_right",
-        "street_light",
+        "inside_left",
         "inside_right",
-        "inside_left"
+        "street_light",
+        "outside_right",
+        "cafe_entry",
+        "outside_middle",
+        "outside_left",
+        "bar_light"
       ]
     },
     {
       "leds": [
-        "f1ya",
-        "f1yb",
-        "f1ra",
+        "outside floor 2 right",
+        "outside floor 2 right",
+        "kitchen",
         "f1rb",
         "f2ya",
         "f2yb",

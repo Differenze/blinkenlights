@@ -49,8 +49,9 @@ cycle = [
     [1, 1]]
 
 i = 0
+dr.start()
 while True:
-    input(dr.data)
+    input(dr.brightness)
     # dr.data = dr.data[1:len(dr.data)] + [dr.data[0]]
     # # dr.data[0:2] = cycle[i]
     # # dr.data[2:4] = cycle[i]
