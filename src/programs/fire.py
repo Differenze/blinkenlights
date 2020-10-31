@@ -23,7 +23,7 @@ class Fire(Program):
         self.y0 = y0
         self.y1 = y1
 
-    def run(self, tick: int, time: Time):
+    def run(self, time: Time):
         r = get_bits(random.randrange(1, 3))
         y = get_bits(random.randrange(1, 3))
         self.driver.set_light(self.r0, r[0])

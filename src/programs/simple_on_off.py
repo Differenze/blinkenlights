@@ -11,7 +11,7 @@ class SimpleOnOff(Program):
         self.off_time = off_time
         self.led_name = led_name
 
-    def run(self, tick: int, time: Time):
+    def run(self, time: Time):
         if self.off_time > time > self.on_time:
             self.driver.set_light(self.led_name, 1)
         else:

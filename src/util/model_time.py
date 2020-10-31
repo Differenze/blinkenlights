@@ -1,7 +1,7 @@
-REAL_SECONDS_PER_MODEL_SECOND = 2 / 60
-MODEL_SECONDS_PER_TICK = 0.1
-TICK_TIME = REAL_SECONDS_PER_MODEL_SECOND * MODEL_SECONDS_PER_TICK
-print(TICK_TIME)
+# REAL_SECONDS_PER_MODEL_SECOND = 2 / 60
+# MODEL_SECONDS_PER_TICK = 0.1
+# TICK_TIME = REAL_SECONDS_PER_MODEL_SECOND * MODEL_SECONDS_PER_TICK
+# print(TICK_TIME)
 
 class Time:
     hour = 0
@@ -32,7 +32,17 @@ class Time:
         self.hour = int(model_hour % 24)
 
     def get_tick(self) -> int:
-        return ((self.hour*60+self.minute)*60+self.second) // MODEL_SECONDS_PER_TICK
+        return int(((self.hour*60+self.minute)*60+self.second) // MODEL_SECONDS_PER_TICK)
+
+    def __add__(self, other):
+        second_sum = self.second + other.second
+        second = second_sum % 60
+        overflow = second_sum // 60
+        minute_sum = self.minute + other.minute + overflow
+        minute = minute_sum % 60
+        overflow = minute_sum // 60
+        hour = (self.hour+other.hour+overflow) % 24
+        return Time(hour, minute, second)
 
     def __str__(self):
         return "{:02d}:{:02d}:{:02d}".format(self.hour, self.minute, self.second)
