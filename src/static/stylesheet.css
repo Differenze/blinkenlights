@@ -1,0 +1,12 @@
+
+body {
+    background-color: #555555;
+}
+
+.name_label {
+    width: 200px;
+}
+
+.led {
+    display: flex;
+}

@@ -24,8 +24,8 @@ class BrokenLamp(Program):
         self.off_time = off_time
         self.led_name = led_name
 
-    def run(self, tick: int, time: Time):
-        if tick % 10 != 0:
+    def run(self, time: Time):
+        if time.second % 10 != 0:
             return
         if self.off_time > time > self.on_time:
             if self.flicker:

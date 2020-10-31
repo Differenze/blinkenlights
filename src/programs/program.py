@@ -10,5 +10,5 @@ class Program(ABC):
         pass
 
     @abstractmethod
-    def run(self, tick: int, time: Time):
+    def run(self, time: Time):
         pass
