@@ -34,8 +34,8 @@ def driver_thread():
 
 if __name__ == "__main__":
     driver = Driver()
-    pt = threading.Thread(target=program_thread, daemon=True)
-    dt = threading.Thread(target=driver_thread, daemon=True)
+    pt = threading.Thread(target=program_thread, args=(driver,), daemon=True)
+    dt = threading.Thread(target=driver_thread, args=(driver,), daemon=True)
     pt.start()
     dt.start()
     time.sleep(10)
